@@ -1,4 +1,5 @@
 ﻿using DevFramework.Core.Aspects.Postsharp;
+using DevFramework.Core.Aspects.Postsharp.TransactionAspects;
 using DevFramework.Core.CrossCuttingConcerns.Validation.FluentValidation;
 using DevFramework.Northwind.Business.Abstract;
 using DevFramework.Northwind.Business.ValidationRules.FluentValidation;
@@ -36,6 +37,17 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
 		public Product GetById(int id)
 		{
 			return _productDal.Get(p=>p.ProductId==id);
+
+		}
+
+
+		[TransactionScopeAspect]
+		public void TransactionalOperation(Product product1, Product product2) 
+		{
+			_productDal.Add(product1);
+			//Business Code
+			_productDal.Update(product2);
+
 
 		}
 	}

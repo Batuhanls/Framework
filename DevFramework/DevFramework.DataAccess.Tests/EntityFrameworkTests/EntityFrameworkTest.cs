@@ -18,7 +18,7 @@ namespace DevFramework.DataAccess.Tests.EntityFrameworkTests
 			Assert.AreEqual(78, result.Count);
 		}
 
-
+		
 		[TestMethod]
 		public void Get_all_with_paramater_returns_filtered_products()
 		{

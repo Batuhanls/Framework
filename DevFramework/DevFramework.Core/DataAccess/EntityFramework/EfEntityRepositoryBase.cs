@@ -15,44 +15,27 @@ namespace DevFramework.Core.DataAccess.EntityFramework
 	{
 		public TEntity Add(TEntity entity)
 		{
-
 			using (var context=new TContext())
 			{
 				var addEntity = context.Entry(entity);
-				addEntity.State = EntityState.Added;
+				addEntity.State= EntityState.Added;
 				context.SaveChanges();
 				return entity;
-			
-
 
 			}
+
+
+
 		}
-
-
-		public TEntity Update(TEntity entity)
-		{
-			using (var context=new TContext())
-			{
-				var updateEntity = context.Entry(entity);
-				updateEntity.State = EntityState.Modified;
-				context.SaveChanges();
-				return entity;
-				
-
-			}
-			
-		}
-
-
 
 		public void Delete(TEntity entity)
 		{
-			using (var context = new TContext())
+			using (var context=new TContext())
 			{
-				var deleteEntity = context.Entry(entity);
+				var deleteEntity=context.Entry(entity);
 				deleteEntity.State = EntityState.Deleted;
 				context.SaveChanges();
-				
+
 			}
 		}
 
@@ -60,24 +43,38 @@ namespace DevFramework.Core.DataAccess.EntityFramework
 		{
 			using (var context=new TContext())
 			{
-
-				return context.Set<TEntity>().SingleOrDefault();
+				return context.Set<TEntity>().SingleOrDefault(filter);
 
 			}
+
+
 		}
 
 		public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
 		{
 			using (var context=new TContext())
 			{
-				return filter == null
-					? context.Set<TEntity>().ToList()
+				
+           return filter==null ? context.Set<TEntity>().ToList()
 					: context.Set<TEntity>().Where(filter).ToList();
-			}
 
+
+			}
 		}
 
+		public TEntity Update(TEntity entity)
+		{
+			using (var context=new TContext())
+			{
+				var updateEntity = context.Entry(entity);
+				updateEntity.State= EntityState.Modified;
+				context.SaveChanges();
+				return entity;
 
-	
+			}
+
+
+
+		}
 	}
 }

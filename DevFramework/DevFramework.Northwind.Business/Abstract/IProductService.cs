@@ -12,6 +12,7 @@ namespace DevFramework.Northwind.Business.Abstract
 		List<Product> GetAll();
 		Product GetById(int id);
 		Product Add(Product product);
+		void TransactionalOperation(Product product1,Product product2);
 
 	}
 }
