@@ -15,7 +15,7 @@ namespace DevFramework.Core.Aspects.Postsharp.LogAspects
 	[MulticastAttributeUsage(MulticastTargets.Method, TargetMemberAttributes = MulticastAttributes.Instance)]
 	public class LogAspect : OnMethodBoundaryAspect
 	{
-		private Type _loggerType;
+		private readonly Type _loggerType;
 		LoggerService _loggerService;
 
 		public LogAspect(Type loggerType)
